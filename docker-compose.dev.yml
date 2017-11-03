@@ -1,0 +1,7 @@
+version: '3'
+
+services:
+  todo-backend-app:
+    environment:
+      NODE_ENV: development
+    command: npx nodemon

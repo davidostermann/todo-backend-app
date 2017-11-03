@@ -1,9 +1,11 @@
 # todo-backend-app
 
-# Créer un app server nodejs
+## Créer un app server nodejs
 
 ``` npm init ```
 ``` npm i -S express ```
+
+## Install and use nodemon
 
 ## Mettre en place l'environnement
 

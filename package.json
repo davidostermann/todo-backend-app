@@ -1,0 +1,23 @@
+{
+  "name": "todo-backend-app",
+  "version": "1.0.0",
+  "description": "# Créer un app server nodejs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davidostermann/todo-backend-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/davidostermann/todo-backend-app/issues"
+  },
+  "homepage": "https://github.com/davidostermann/todo-backend-app#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}

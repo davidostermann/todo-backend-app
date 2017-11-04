@@ -56,7 +56,31 @@ NB : Pour trouver l'ID du container postgres :
 
 ``` CREATE DATABASE todoapp; ```
 
+https://www.tutorialspoint.com/postgresql/postgresql_create_database.htm
 
+### Creation des tables avec db-migrate
+
+https://db-migrate.readthedocs.io/en/latest/Getting%20Started/installation/
+
+#### Pourquoi DB_MIGRATE
+
+Parce qu'il nous permet de configurer des environnement de dev, prod, test et de gérer des migrations.
+
+#### Qu'est ce qu'une migration :
+
+C'est l'action de modifier la structure de la base de données en sauvegardant l'intégrité des données.
+
+Par exemple, on peut ajouter une colonne ou en supprimer une sans recréer toute la base.
+
+db-migrate nous permet d'éxécuter l'action et de revenir en arrière si quelquechose c'est mal passé.
+
+### install les librairie node pour gérer POSTGRES : 
+
+``` npm i -S pg db-migrate db-migrate-pg ```
+
+### Creation du fichier de configuration
+
+Créer un fichier database.json avec les info de connexion à la base de donnée postgres.
 
 
 

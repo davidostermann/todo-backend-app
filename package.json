@@ -18,7 +18,10 @@
   },
   "homepage": "https://github.com/davidostermann/todo-backend-app#readme",
   "dependencies": {
-    "express": "^4.16.2"
+    "db-migrate": "^0.10.0-beta.24",
+    "db-migrate-pg": "^0.2.5",
+    "express": "^4.16.2",
+    "pg": "^7.3.0"
   },
   "devDependencies": {
     "nodemon": "^1.12.1"

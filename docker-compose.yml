@@ -1,49 +1,32 @@
-version: '3'
-
-services:
-  todo-backend-app:
-    image: todo-backend-app
+version: '2'
+services :
+  web :
     build: .
-    environment:
-      NODE_ENV: production
-    ports:
-      - 3000:3000
     command: npm start
-    
+    volumes:
+      - .:/usr/app
+      - /usr/app/node_modules
+    ports:
+      - "3000:3000"
+    depends_on: 
+      - postgres
+    environment:
+      DATABASE_URL: postgres://postgres:changeme@postgres/tododb
   postgres:
-    image: postgres
+    image: postgres:10-alpine
+    ports:
+      - "5432:5432"
+    volumes:
+       - ~/data/postgres:/data/postgres
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: changeme
+      POSTGRES_DB: tododb
       PGDATA: /data/postgres
-    volumes:
-       - ~/data/postgres:/data/postgres
-    ports:
-      - "5432:5432"
-    networks:
-      - postgres
-    restart: unless-stopped
-  
-  pgadmin:
-    links:
-      - postgres:postgres
-    image: fenglc/pgadmin4
-    volumes:
-       - ~/data/pgadmin:/root/.pgadmin
-    ports:
-      - "5050:5050"
-    networks:
-      - postgres
-    restart: unless-stopped
-
   adminer:
     image: adminer
     restart: always
+    depends_on: 
+      - postgres
     ports:
       - 8080:8080
-    networks:
-      - postgres
-
-networks:
-  postgres:
-    driver: bridge

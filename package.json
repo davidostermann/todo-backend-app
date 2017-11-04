@@ -4,6 +4,8 @@
   "description": "# Créer un app server nodejs",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
+    "dev": "PORT=3001 nodemon --watch ./",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,7 +23,8 @@
     "db-migrate": "^0.10.0-beta.24",
     "db-migrate-pg": "^0.2.5",
     "express": "^4.16.2",
-    "pg": "^7.3.0"
+    "pg": "^7.3.0",
+    "pg-promise": "^7.2.1"
   },
   "devDependencies": {
     "nodemon": "^1.12.1"

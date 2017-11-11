@@ -1,11 +1,10 @@
-const express = require('express')
 
-const app = express()
+// init PostgreSQL DB
 
 const initOptions = {
   connect(client, dc, isFresh) {
-    const cp = client.connectionParameters;
-    console.log('Connected to datbase:', cp.database);
+    // A connection-related success;
+    console.log('Connected to datbase:', client.connectionParameters.database);
   },
   error(error, e) {
     if (e.cn) {
@@ -17,25 +16,29 @@ const initOptions = {
 };
 
 const pgp = require('pg-promise')(initOptions);
-
-//console.log('process.env.DATABASE_URL : ', process.env.DATABASE_URL);
 const db = pgp(process.env.DATABASE_URL || 'postgres://postgres:changeme@localhost:5432/tododb');
 
+db.connect()
+  .then(function (obj) {
+    obj.done(); // success, release connection;
+  })
+  .catch(function (error) {
+    console.log("ERROR:", error.message);
+  });
+
+//init express
+
+const express = require('express')
+const app = express()
 app.use(express.json())
 
-// db.connect()
-//   .then(function (obj) {
-//     obj.done(); // success, release connection;
-//   })
-//   .catch(function (error) {
-//     console.log("ERROR:", error.message);
-//   });
+// routes management
 
 app.get('/', (req, res) => {
   return res.send('coucou')
 })
 
-app.get('/todos', (req, res) => {
+app.get('/todos', async (req, res) => {
   try {
     const todos = await db.any('SELECT * FROM todos');
     return res.send('TODOS : ' + JSON.stringify(todos))
@@ -50,8 +53,6 @@ app.get('/todos', (req, res) => {
 })
 
 app.post('/todo', (req, res) => {
-  console.log('req.body : ', req.body);
-
   db.none('INSERT INTO todos(name) VALUES($1)', [req.body.name])
     .then(data => {
       return res.send('INSERTED : ' + data)
@@ -59,7 +60,6 @@ app.post('/todo', (req, res) => {
     .catch(error => {
       return res.send('ERROR : ' + error)
     });
-  
 })
 
 const port = process.env.PORT || 3000
